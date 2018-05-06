@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,20 +20,23 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 
 /**
- *
  * @author Seeraj
  */
 @Entity
-@NamedQuery(name=Employee.FIND_BY_ID, query = "select e from Employee e where e.id = :id and e.userEmail = :email")
+@NamedQuery(name = Employee.FIND_BY_ID, query = "select e from Employee e where e.id = :id and e.userEmail = :email")
 @NamedQuery(name = Employee.FIND_BY_NAME, query = "select e from Employee e where e.fullName = :name and e.userEmail = :email")
 @NamedQuery(name = Employee.LIST_EMPLOYEES, query = "select  e from Employee e where e.userEmail = :email")
-public class Employee extends AbstractEntity{
+@NamedQuery(name = Employee.FIND_PAST_PAYSLIP_BY_ID,
+        query = "select p from Employee e join e.pastPayslips p where e.id = :employeeId and e.userEmail =:email and p.id =:payslipId and p.userEmail = :email")
+@NamedQuery(name = Employee.GET_PAST_PAYSLIPS, query = "select p from Employee e inner join e.pastPayslips p where e.id = :employeeId and e.userEmail=:email")
+public class Employee extends AbstractEntity {
 
 
-    public static final String FIND_BY_ID = "findById";
-    public static final String FIND_BY_NAME = "findByName";
-    public static final String LIST_EMPLOYEES = "listEmployees";
-
+    public static final String FIND_BY_ID = "Employee.findById";
+    public static final String FIND_BY_NAME = "Employee.findByName";
+    public static final String LIST_EMPLOYEES = "Employee.listEmployees";
+    public static final String FIND_PAST_PAYSLIP_BY_ID = "Employee.findPastPayslipById";
+    public static final String GET_PAST_PAYSLIPS = "Employee.getPastPayslips";
 
 
     @NotEmpty(message = "Name cannot be empty")
@@ -50,7 +55,7 @@ public class Employee extends AbstractEntity{
     private LocalDate hiredDate;
 
     @OneToMany
-    private Collection<Allowance> employeeAllowances = new ArrayList<>();
+    private Set<Allowance> employeeAllowances = new HashSet<>();
 
     @OneToOne
     private Payslip currentPayslip;
@@ -61,7 +66,16 @@ public class Employee extends AbstractEntity{
 
     @ManyToOne
     private Department department;
+    @Lob
+    private byte[] picture;
 
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
 
     public Payslip getCurrentPayslip() {
         return currentPayslip;
@@ -87,11 +101,11 @@ public class Employee extends AbstractEntity{
         this.hiredDate = hiredDate;
     }
 
-    public Collection<Allowance> getEmployeeAllowances() {
+    public Set<Allowance> getEmployeeAllowances() {
         return employeeAllowances;
     }
 
-    public void setEmployeeAllowances(Collection<Allowance> employeeAllowances) {
+    public void setEmployeeAllowances(Set<Allowance> employeeAllowances) {
         this.employeeAllowances = employeeAllowances;
     }
 

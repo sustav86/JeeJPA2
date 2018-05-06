@@ -12,9 +12,9 @@ import java.util.Collection;
 @NamedQuery(name = Department.LIST_DEPARTMENTS, query = "select d from Department d where  d.userEmail = :email")
 public class Department extends AbstractEntity {
 
-    public static final String FIND_BY_ID = "findById";
-    public static final String FIND_BY_NAME = "findByName";
-    public static final String LIST_DEPARTMENTS = "listDepartments";
+    public static final String FIND_BY_ID = "Department.findById";
+    public static final String FIND_BY_NAME = "Department.findByName";
+    public static final String LIST_DEPARTMENTS = "Department.listDepartments";
 
 
     @NotEmpty(message = "Department name must be set")
