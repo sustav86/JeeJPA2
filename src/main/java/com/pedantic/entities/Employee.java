@@ -94,6 +94,30 @@ public class Employee extends AbstractEntity {
         this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
+    public Employee getReportsTo() {
+        return reportsTo;
+    }
+
+    public void setReportsTo(Employee reportsTo) {
+        this.reportsTo = reportsTo;
+    }
+
+    public Set<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public void setSubordinates(Set<Employee> subordinates) {
+        this.subordinates = subordinates;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public int getAge() {
         return age;
     }
