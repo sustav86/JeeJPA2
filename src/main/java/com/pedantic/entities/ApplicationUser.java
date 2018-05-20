@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 public class ApplicationUser extends AbstractEntity{
 
     private String email;
-    private String applicationUserName;
+
 
 
 
@@ -21,13 +21,7 @@ public class ApplicationUser extends AbstractEntity{
         this.email = email;
     }
 
-    public String getApplicationUserName() {
-        return applicationUserName;
-    }
 
-    public void setApplicationUserName(String applicationUserName) {
-        this.applicationUserName = applicationUserName;
-    }
 
     public String getPassword() {
         return password;
