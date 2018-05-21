@@ -2,6 +2,7 @@ package com.pedantic.entities;
 
 public enum EmploymentType {
     FULL_TIME, //0
-    PART_TIME, //1
-    CONTRACT  //2
+    CASUAL,//1
+    PART_TIME, //2
+    CONTRACT  //3
 }
