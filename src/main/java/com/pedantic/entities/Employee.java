@@ -86,6 +86,7 @@ public class Employee extends AbstractEntity {
     @ManyToOne
     private Department department;
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] picture;
 
 

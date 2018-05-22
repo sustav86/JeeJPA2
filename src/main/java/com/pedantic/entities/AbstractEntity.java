@@ -2,6 +2,7 @@ package com.pedantic.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
@@ -15,6 +16,26 @@ public abstract class AbstractEntity implements Serializable {
 
     @Version
     protected Long version;
+
+
+    protected LocalDateTime createdOn;
+    protected LocalDateTime updatedOn;
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public LocalDateTime getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(LocalDateTime updatedOn) {
+        this.updatedOn = updatedOn;
+    }
 
     public Long getVersion() {
         return version;
