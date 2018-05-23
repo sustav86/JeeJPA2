@@ -12,6 +12,13 @@ public abstract class AbstractEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
+//    Primitive Java types: byte, int, short, long, and char
+//    Wrapper classes of primitive Java types: Byte, Integer, Short, Long,
+//    and Character
+//    String: java.lang.String
+//    Large numeric type: java.math.BigInteger
+//    Temporal types: java.util.Date and java.sql.Date
+
     protected String userEmail;
 
     @Version
