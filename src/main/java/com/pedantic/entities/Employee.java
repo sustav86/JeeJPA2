@@ -90,14 +90,25 @@ public class Employee extends AbstractEntity{
     private Set<Allowance> employeeAllowances = new HashSet<>();
 
     @OneToOne
+    @JoinColumn(name = "CURRENT_PAYSLIP_ID")
     private Payslip currentPayslip;
+
+    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY)
+    private ParkingSpace parkingSpace;
+
 
     @OneToMany
     private Collection<Payslip> pastPayslips = new ArrayList<>();
 
 
     @ManyToOne
+    @JoinColumn(name = "DEPT_ID")
     private Department department;
+
+    @ManyToMany(mappedBy = "employees")
+    private Collection<Project> projects;
+
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] picture;
@@ -106,6 +117,15 @@ public class Employee extends AbstractEntity{
     @PrePersist
     private void init() {
         this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
+
+
+    public ParkingSpace getParkingSpace() {
+        return parkingSpace;
+    }
+
+    public void setParkingSpace(ParkingSpace parkingSpace) {
+        this.parkingSpace = parkingSpace;
     }
 
     public Employee getReportsTo() {
