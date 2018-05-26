@@ -6,6 +6,7 @@
 package com.pedantic.entities;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
@@ -16,6 +17,7 @@ import java.util.Set;
 import javax.ejb.Local;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
+import javax.print.DocFlavor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -84,6 +86,14 @@ public class Employee extends AbstractEntity{
     @Embedded
     private Address address;
 
+    @ElementCollection
+    @CollectionTable(name = "QUALIFICATIONS", joinColumns = @JoinColumn(name = "EMP_ID"))
+    private Collection<Qualifications> qualifications = new ArrayList<>();
+
+    @ElementCollection
+    @Column(name = "NICKY")
+    private Collection<String> nickNames = new ArrayList<>();
+
     private int age;
 
     @OneToMany
@@ -106,7 +116,7 @@ public class Employee extends AbstractEntity{
     private Department department;
 
     @ManyToMany(mappedBy = "employees")
-    private Collection<Project> projects;
+    private Collection<Project> projects = new ArrayList<>();
 
 
     @Lob
@@ -119,6 +129,30 @@ public class Employee extends AbstractEntity{
         this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
+
+    public Collection<Qualifications> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(Collection<Qualifications> qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public Collection<String> getNickNames() {
+        return nickNames;
+    }
+
+    public void setNickNames(Collection<String> nickNames) {
+        this.nickNames = nickNames;
+    }
+
+    public Collection<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
 
     public ParkingSpace getParkingSpace() {
         return parkingSpace;

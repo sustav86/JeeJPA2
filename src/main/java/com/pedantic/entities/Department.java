@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NamedQuery(name = Department.FIND_BY_ID, query = "select d from Department d where d.id = :id and d.userEmail = :email")
@@ -23,7 +24,8 @@ public class Department extends AbstractEntity {
     private String departmentName;
 
     @OneToMany(mappedBy = "department")
-    private Collection<Employee> employees = new ArrayList<>();
+    @OrderBy("fullName ASC, dateOfBirth desc ")
+    private List<Employee> employees = new ArrayList<>();
 
     @Transient
     private String departmentCode;
@@ -45,11 +47,11 @@ public class Department extends AbstractEntity {
         this.departmentName = departmentName;
     }
 
-    public Collection<Employee> getEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Collection<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 }
