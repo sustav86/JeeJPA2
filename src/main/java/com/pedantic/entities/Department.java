@@ -24,7 +24,8 @@ public class Department extends AbstractEntity {
     private String departmentName;
 
     @OneToMany(mappedBy = "department")
-    @OrderBy("fullName ASC, dateOfBirth desc ")
+//    @OrderBy("fullName ASC, dateOfBirth desc ")
+    @OrderColumn(name = "EMPLOYEE_POSITION")
     private List<Employee> employees = new ArrayList<>();
 
     @Transient
