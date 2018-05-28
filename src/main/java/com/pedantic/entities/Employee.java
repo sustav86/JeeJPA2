@@ -10,10 +10,7 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.ejb.Local;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
@@ -111,6 +108,13 @@ public class Employee extends AbstractEntity{
     private Collection<Payslip> pastPayslips = new ArrayList<>();
 
 
+    @ElementCollection
+    @CollectionTable(name = "EMP_PHONE_NUMBERS")
+    @MapKeyColumn(name = "PHONE_TYPE")
+    @Column(name = "PHONE_NUMBER")
+    @MapKeyEnumerated(EnumType.STRING)
+    private Map<PhoneType, String> employeePhoneNumbers = new HashMap<>();
+
     @ManyToOne
     @JoinColumn(name = "DEPT_ID")
     private Department department;
@@ -129,6 +133,14 @@ public class Employee extends AbstractEntity{
         this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
+
+    public Map<PhoneType, String> getEmployeePhoneNumbers() {
+        return employeePhoneNumbers;
+    }
+
+    public void setEmployeePhoneNumbers(Map<PhoneType, String> employeePhoneNumbers) {
+        this.employeePhoneNumbers = employeePhoneNumbers;
+    }
 
     public Collection<Qualifications> getQualifications() {
         return qualifications;

@@ -3,9 +3,7 @@ package com.pedantic.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NamedQuery(name = Department.FIND_BY_ID, query = "select d from Department d where d.id = :id and d.userEmail = :email")
@@ -23,10 +21,22 @@ public class Department extends AbstractEntity {
 
     private String departmentName;
 
-    @OneToMany(mappedBy = "department")
+//    @OneToMany(mappedBy = "department")
 //    @OrderBy("fullName ASC, dateOfBirth desc ")
-    @OrderColumn(name = "EMPLOYEE_POSITION")
-    private List<Employee> employees = new ArrayList<>();
+//    @OrderColumn(name = "EMPLOYEE_POSITION")
+//    private List<Employee> employees = new ArrayList<>();
+
+    @OneToMany
+    @MapKey(name = "id")
+    @JoinTable(name = "DEPT_EMPLOYEES")
+    private Map<Long, Employee> employees = new HashMap<>();
+
+
+    @ElementCollection
+    @CollectionTable(name = "EMPLOYEE_RANKS")
+    @MapKeyJoinColumn(name = "EMP_ID")
+    @Column(name = "RANK")
+    private Map<Employee, Integer> employeeRanks = new HashMap<>();
 
     @Transient
     private String departmentCode;
@@ -48,11 +58,27 @@ public class Department extends AbstractEntity {
         this.departmentName = departmentName;
     }
 
-    public List<Employee> getEmployees() {
+    public Map<Long, Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(Map<Long, Employee> employees) {
         this.employees = employees;
     }
+
+    public Map<Employee, Integer> getEmployeeRanks() {
+        return employeeRanks;
+    }
+
+    public void setEmployeeRanks(Map<Employee, Integer> employeeRanks) {
+        this.employeeRanks = employeeRanks;
+    }
+
+    //    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
 }
