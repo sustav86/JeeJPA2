@@ -84,7 +84,7 @@ public class Employee extends AbstractEntity{
     private Address address;
 
     @ElementCollection
-    @CollectionTable(name = "QUALIFICATIONS", joinColumns = @JoinColumn(name = "EMP_ID"))
+    @CollectionTable(name = "QUALIFICATIONS", joinColumns = @JoinColumn(name = "EMP_ID") )
     private Collection<Qualifications> qualifications = new ArrayList<>();
 
     @ElementCollection
@@ -93,14 +93,14 @@ public class Employee extends AbstractEntity{
 
     private int age;
 
-    @OneToMany
+    @OneToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<Allowance> employeeAllowances = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "CURRENT_PAYSLIP_ID")
     private Payslip currentPayslip;
 
-    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private ParkingSpace parkingSpace;
 
 
