@@ -1,4 +1,4 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 public enum PhoneType {
     HOME,   //0

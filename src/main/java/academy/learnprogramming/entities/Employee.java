@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-import javax.ejb.Local;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
-import javax.print.DocFlavor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -24,6 +20,10 @@ import javax.validation.constraints.PastOrPresent;
  * @author Seeraj
  */
 @Entity
+
+@NamedQuery(name = Employee.GET_ALL_PARKING_SPACES, query = "select e.parkingSpace from Employee e")
+@NamedQuery(name = Employee.EMPLOYEE_PROJECTION, query = "select e.fullName, e.basicSalary from Employee e")
+@NamedQuery(name = Employee.EMPLOYEE_CONSTRUCTOR_PROJ, query = "select new academy.learnprogramming.entities.EmployeeDetails(e.fullName, e.basicSalary, e.department.departmentName) from Employee  e")
 @NamedQuery(name = Employee.FIND_BY_ID, query = "select e from Employee e where e.id = :id and e.userEmail = :email")
 @NamedQuery(name = Employee.FIND_BY_NAME, query = "select e from Employee e where e.fullName = :name and e.userEmail = :email")
 @NamedQuery(name = Employee.LIST_EMPLOYEES, query = "select  e from Employee e where e.userEmail = :email order by e.fullName")
@@ -41,18 +41,15 @@ public class Employee extends AbstractEntity{
 //    private Long id;
 
 
-
-
-
-
-
+    public static final String EMPLOYEE_PROJECTION = "Employee.nameAndSalaryProjection";
+    public static final String EMPLOYEE_CONSTRUCTOR_PROJ = "Employee.projection";
 
     public static final String FIND_BY_ID = "Employee.findById";
     public static final String FIND_BY_NAME = "Employee.findByName";
     public static final String LIST_EMPLOYEES = "Employee.listEmployees";
     public static final String FIND_PAST_PAYSLIP_BY_ID = "Employee.findPastPayslipById";
     public static final String GET_PAST_PAYSLIPS = "Employee.getPastPayslips";
-
+    public static final String GET_ALL_PARKING_SPACES = "Employee.getAllParkingSpaces";
 
     @NotEmpty(message = "Name cannot be empty")
     @Basic

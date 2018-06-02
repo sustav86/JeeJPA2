@@ -1,4 +1,4 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;

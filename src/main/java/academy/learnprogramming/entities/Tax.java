@@ -1,8 +1,7 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.math.BigDecimal;

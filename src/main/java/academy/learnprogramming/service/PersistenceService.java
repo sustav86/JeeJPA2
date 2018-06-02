@@ -1,8 +1,8 @@
-package com.pedantic.service;
+package academy.learnprogramming.service;
 
-import com.pedantic.entities.Department;
-import com.pedantic.entities.Employee;
-import com.pedantic.entities.ParkingSpace;
+import academy.learnprogramming.entities.Employee;
+import academy.learnprogramming.entities.Department;
+import academy.learnprogramming.entities.ParkingSpace;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.ejb.Stateless;

@@ -1,11 +1,16 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.util.*;
 
+//SELECT <select_expression>
+//        FROM <from_clause>
+//        [WHERE <conditional_expression>]
+//        [ORDER BY <order_by_clause>]
 @Entity
+@NamedQuery(name = Department.GET_DEPARTMENT_LIST, query = "select d from Department  d")
+@NamedQuery(name = Department.GET_DEPARTMENT_NAMES, query = "select d.departmentName from Department  d")
 @NamedQuery(name = Department.FIND_BY_ID, query = "select d from Department d where d.id = :id and d.userEmail = :email")
 @NamedQuery(name = Department.FIND_BY_NAME, query = "select d from Department d where d.departmentName = :name and d.userEmail = :email")
 @NamedQuery(name = Department.LIST_DEPARTMENTS, query = "select d from Department d where  d.userEmail = :email")
@@ -15,10 +20,14 @@ public class Department extends AbstractEntity {
     public static final String FIND_BY_ID = "Department.findById";
     public static final String FIND_BY_NAME = "Department.findByName";
     public static final String LIST_DEPARTMENTS = "Department.listDepartments";
+    public static final String GET_DEPARTMENT_LIST = "Department.getAllDepartments";
+    public static final String GET_DEPARTMENT_NAMES = "Department.getDeptNames";
+
+
+
 
 
     @NotEmpty(message = "Department name must be set")
-
     private String departmentName;
 
 //    @OneToMany(mappedBy = "department")

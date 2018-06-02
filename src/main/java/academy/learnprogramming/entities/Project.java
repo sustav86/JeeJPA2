@@ -1,8 +1,7 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity

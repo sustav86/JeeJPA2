@@ -1,4 +1,4 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 public enum EmploymentType {
     FULL_TIME, //0

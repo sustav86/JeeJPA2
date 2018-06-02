@@ -1,4 +1,4 @@
-package com.pedantic.config;
+package academy.learnprogramming.config;
 
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;

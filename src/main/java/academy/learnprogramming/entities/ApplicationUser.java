@@ -1,9 +1,6 @@
-package com.pedantic.entities;
+package academy.learnprogramming.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 public class ApplicationUser extends AbstractEntity{

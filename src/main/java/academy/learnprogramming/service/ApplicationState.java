@@ -1,4 +1,4 @@
-package com.pedantic.service;
+package academy.learnprogramming.service;
 
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
