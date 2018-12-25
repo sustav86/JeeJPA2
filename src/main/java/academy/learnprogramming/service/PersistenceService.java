@@ -10,12 +10,18 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 
+//@DataSourceDefinition(
+//        name = "java:app/Payroll/MyDS",
+//        className = "org.apache.derby.jdbc.ClientDriver",
+//        url = "jdbc:derby://localhost:1527/payroll",
+//        user = "appuser",
+//        password = "password")
 @DataSourceDefinition(
-        name = "java:app/Payroll/MyDS",
-        className = "org.apache.derby.jdbc.ClientDriver",
-        url = "jdbc:derby://localhost:1527/payroll",
-        user = "appuser",
-        password = "password")
+        className = "com.mysql.cj.jdbc.Driver",
+        name = "java:global/jdbc/MyDS",
+        url = "jdbc:mysql://localhost:3306/payroll",
+        user = "root",
+        password = "root")
 @Stateless
 public class PersistenceService {
 
